@@ -1,0 +1,6 @@
+{
+  "name": "RoboFusion SCS-RG",
+  "description": "Multi-Hazard Smart Campus Safety & Response Grid command dashboard with live sensor fusion, priority ranking queue, ML risk predictions, and zone actuator controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
