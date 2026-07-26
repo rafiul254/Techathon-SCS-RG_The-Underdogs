@@ -1,6 +1,5 @@
 import { initDB } from './src/database/db.js';
 
-// server start করার আগে:
 await initDB();
 import express from 'express';
 import path from 'path';
@@ -663,7 +662,6 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   });
 });
 
-// 404 Handler (must be after all routes)
 app.use((req, res) => {
   res.status(404).json({
     success: false,
