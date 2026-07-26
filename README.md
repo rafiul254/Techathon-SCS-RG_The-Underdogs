@@ -177,17 +177,51 @@ Techathon/
 
 ## Key Requirements Met
 
-- [x] Server-side risk computation only (TC6, TC8)
-- [x] Multi-zone CRITICAL priority ranking (TC12)
-- [x] RBAC — Staff vs Admin, enforced server-side (TC13)
-- [x] Race-safe incident acknowledgment via UNIQUE constraint (TC7b)
-- [x] ML risk prediction, separate from live score, never triggers actuation (Bonus 3)
-- [x] SQLite with foreign keys + referential integrity (TC17, TC18)
-- [x] Indexed query for CRITICAL incidents last 24h (TC19)
-- [x] Sensor debounce + 30s gas warm-up (TC1, TC2)
-- [x] Edge-case: invalid/negative sensor values rejected (TC23f)
-- [x] Backend restart reconstructs state from DB (TC9)
-- [x] Backup + retention policy documented (TC20, TC21)
+### Section A — Hardware & Sensing (TC1–TC5)
+- [x] TC1: Fire debounce — 5 consecutive HIGH readings required (sketch/sketch.ino)
+- [x] TC2: Gas 30s warm-up suppression after boot (sensorSimulator.ts)
+- [x] TC3: Water level normalized 0.0–1.0, proportional risk contribution
+- [x] TC4: PIR occupancy detection with retrigger delay
+- [x] TC5: CRITICAL triggers Buzzer ON + LED ON + Relay within 1s; WARNING = visual only
+
+### Section B — Backend System (TC6–TC11)
+- [x] TC6: Server-side risk computation only — zone never self-reports state
+- [x] TC7: Race-condition safe acknowledgment via UNIQUE constraint
+- [x] TC8: REST API — zones, incidents, acknowledge, override all documented
+- [x] TC9: Backend restart reconstructs zone state from database
+- [x] TC10: Zone API key auth + dashboard session token enforced
+- [x] TC11: Load handling demonstrated; scalability plan documented
+
+### Section C — Frontend Dashboard (TC12–TC16)
+- [x] TC12: Live zone map auto-updates + priority queue with ranking explanation
+- [x] TC13: RBAC — Staff vs Admin, enforced server-side on every endpoint
+- [x] TC14: Incident timeline — filterable log with full timeline per incident
+- [x] TC15: CRITICAL HAZARD ALARM banner + audio cue; clears on acknowledge
+- [x] TC16: Mixed-state dashboard; accessibility via icon+label not color alone
+
+### Section D — Database Design (TC17–TC21)
+- [x] TC17: Normalized schema — Zones, Sensors, Readings, Incidents, Acknowledgments, Users
+- [x] TC18: ON DELETE RESTRICT + UNIQUE ack constraint; concurrent write safe
+- [x] TC19: INDEX idx_incidents_status_time on Incidents(status, start_time)
+- [x] TC20: SQLite backup via sql.js export; recovery path documented
+- [x] TC21: Raw readings >90 days dropped; only Admin can query raw history
+
+### Section E — Integration & Edge Cases (TC22–TC25)
+- [x] TC22: End-to-end multi-zone incident demonstrated via Simulate Anomaly
+- [x] TC23: Edge cases — invalid values rejected (f), backend restart (e), browser reconnect (d)
+- [x] TC24: System stable under combined load — no crash or freeze
+- [x] TC25: Dashboard, backend, zone node state always consistent
+
+### Section F — Documentation (TC26–TC31)
+- [x] TC26: Wokwi circuit diagrams — SAFE/WARNING/CRITICAL states (docs/circuits/)
+- [x] TC27: Software architecture diagram in docs/DOCUMENTATION.pdf
+- [x] TC28: Full API documentation with example payloads
+- [x] TC29: Database ER schema diagram
+- [x] TC30: Risk fusion formula with weight justification
+- [x] TC31: Video demonstration ≤7 minutes (see submission)
+
+### Section G — Bonus
+- [x] Bonus 3: ML risk prediction — logistic regression, synthetic data, display-only
 
 ---
 
