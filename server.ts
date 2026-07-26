@@ -1,3 +1,7 @@
+import { initDB } from './src/database/db.js';
+
+// server start করার আগে:
+await initDB();
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
